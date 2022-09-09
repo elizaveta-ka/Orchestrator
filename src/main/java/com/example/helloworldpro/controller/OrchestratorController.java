@@ -6,6 +6,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,21 +18,22 @@ import java.io.IOException;
 @CrossOrigin("*")
 @RequestMapping("/api/orchestra")
 public class OrchestratorController {
-private MessageListener messageListener;
+
+    private MessageListener messageListener;
 
     public OrchestratorController(MessageListener messageListener) {
         this.messageListener = messageListener;
     }
 
     @GetMapping
-    public String sendResponse() throws IOException {
+    public String sendResponse(String message) throws IOException {
         // Создать Httpclient, который эквивалентен открытию браузера
         CloseableHttpClient httpClient = HttpClients.createDefault();
         // Создать запрос HttpGet, эквивалентный вводу адреса в браузере
         HttpGet httpGet = new HttpGet("http://localhost:8082/api/hello");
         String resp = null;
         CloseableHttpResponse response = null;
-
+        messageListener.listenGroup(message);
         try {
             // Выполнить запрос, который эквивалентен нажатию Enter после выбивания адреса, чтобы получить ответ
             response = httpClient.execute(httpGet);
@@ -40,9 +42,9 @@ private MessageListener messageListener;
             if (response.getStatusLine().getStatusCode() == 200) {
                 // Анализируем ответ и получаем данные
                 String content = EntityUtils.toString(response.getEntity(), "UTF-8");
-                System.out.println(content);
+            //    System.out.println(content);
 //                if(content.contains("Ok")) {
-                    resp = content;
+                resp = content;
 
 //                    URL url1 = new URL("http://localhost:3000");
 //                    HttpURLConnection connection1 = (HttpURLConnection) url1.openConnection();

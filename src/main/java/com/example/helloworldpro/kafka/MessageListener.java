@@ -2,9 +2,10 @@ package com.example.helloworldpro.kafka;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 public class MessageListener {
     @Value("${kafka.topic.name}")
     private String topicName;

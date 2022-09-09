@@ -22,10 +22,10 @@ public class KafkaTopicConfig {
         configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         return new KafkaAdmin(configs);
     }
+
     @Bean
     public NewTopic orders() {
-        return TopicBuilder.name("orders")
-                .partitions(3)
+        return TopicBuilder.name("parser")
                 .compact()
                 .build();
     }
