@@ -10,9 +10,9 @@ public class MessageListener {
 //    @Autowired
 //    private IProductRepository productRepository;
 
-    @KafkaListener(topics = "${kafka.topic.name}", containerFactory = "kafkaListenerContainerFactory")
-    public void listener(Product product) {
-        System.out.println("Recieved message: " + product);
-//        productRepository.save(product);
-    }
+//    @KafkaListener(topics = "${kafka.topic.name}", containerFactory = "kafkaListenerContainerFactory")
+//    public void listener(Product product) {
+//        System.out.println("Recieved message: " + product);
+////        productRepository.save(product);
+//    }
 }
