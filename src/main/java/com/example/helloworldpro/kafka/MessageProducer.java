@@ -16,10 +16,12 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Component
 public class MessageProducer {
 
-    @Autowired
     private KafkaTemplate<String, Product> kafkaTemplate;
+    @Autowired
+    public MessageProducer(KafkaTemplate<String, Product> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
-    MessageListener listener;
     @Value(value = "${kafka.topic.name}")
     private String topicName;
 

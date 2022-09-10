@@ -26,6 +26,7 @@ public class KafkaConsumerConfig {
     public ConsumerFactory<String, Product> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "consuming");
 
         DefaultJackson2JavaTypeMapper typeMapper = new DefaultJackson2JavaTypeMapper();
         Map<String, Class<?>> classMap = new HashMap<>();

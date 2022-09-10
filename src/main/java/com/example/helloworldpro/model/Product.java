@@ -2,6 +2,8 @@ package com.example.helloworldpro.model;
 
 public class Product {
 
+    private Long id;
+
     private String name;
 
     private int price;
@@ -39,6 +41,14 @@ public class Product {
                 ", size='" + size + '\'' +
                 ", rate=" + rate +
                 '}';
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

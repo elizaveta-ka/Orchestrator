@@ -5,6 +5,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import java.io.IOException;
 public class OrchestratorController {
 
     @GetMapping
+    @KafkaListener(topics = "${kafka.topic.name}", containerFactory = "kafkaListenerContainerFactory")
     public String sendResponse() throws IOException {
         // Создать Httpclient, который эквивалентен открытию браузера
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -34,26 +36,7 @@ public class OrchestratorController {
                 // Анализируем ответ и получаем данные
                 String content = EntityUtils.toString(response.getEntity(), "UTF-8");
                 System.out.println(content);
-//                if(content.contains("Ok")) {
                     resp = content;
-
-//                    URL url1 = new URL("http://localhost:3000");
-//                    HttpURLConnection connection1 = (HttpURLConnection) url1.openConnection();
-//                    connection1.setRequestMethod("GET");
-//                    connection1.setDoOutput(true);
-//                    try (BufferedReader br1 = new BufferedReader(new InputStreamReader(
-//                            connection1.getInputStream()))) {
-//                        String line1;
-//                        while ((line1 = br1.readLine()) != null) {
-//                            System.out.println(line1);
-//                        }
-//                    } catch (Exception e) {
-//                        assert e != null;
-//                        e.printStackTrace();
-//                    }
-//                } else {
-//                    resp = "Fail response";
-//                }
             }
 
         } catch (IOException e) {
@@ -66,6 +49,7 @@ public class OrchestratorController {
             // Закрыть браузер
             httpClient.close();
         }
+
         return resp;
     }
 }
