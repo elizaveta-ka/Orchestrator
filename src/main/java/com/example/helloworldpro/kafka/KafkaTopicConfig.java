@@ -31,6 +31,11 @@ public class KafkaTopicConfig {
         return new NewTopic(topicName, 1, (short) 1);
     }
 
+    @Bean
+    public NewTopic topicFrontToParser() {
+        return new NewTopic("topicFrontToParser", 1, (short) 1);
+    }
+
     //topicName для создания новых топико
 
 //    @Bean

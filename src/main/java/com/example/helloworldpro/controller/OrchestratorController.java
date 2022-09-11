@@ -20,6 +20,6 @@ public class OrchestratorController {
     @KafkaListener(topics = "${kafka.topic.name}", containerFactory = "kafkaListenerContainerFactory")
     public void listener(String product) {
         System.out.println("Recieved message: " + product);
-        messageProducer.sendMessage(product);
+      //  messageProducer.sendMessage(product);
     }
 }

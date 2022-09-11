@@ -1,7 +1,5 @@
 package com.example.helloworldpro.kafka;
 
-import com.example.helloworldpro.model.Product;
-
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,33 +10,34 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import java.io.File;
+
 @Slf4j
 @NoArgsConstructor
 @Component
-public class MessageProducer {
+public class MessageProducerFile {
 
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, File> kafkaTemplate;
     @Autowired
-    public MessageProducer(KafkaTemplate<String, String> kafkaTemplate) {
+    public MessageProducerFile(KafkaTemplate<String, File> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @Value(value = "${kafka.topic.name}")
-    private String topicName;
+//    @Value(value = "${kafka.topic.name}")
+//    private String topicName;
 
-
-    public void sendMessage(String product) {
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, product);
+    public void sendMessage(File fileName, String topicName) {
+        ListenableFuture<SendResult<String, File>> future = kafkaTemplate.send(topicName, fileName);
 
         future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onFailure(Throwable throwable) {
-                log.error("Unable to send message = {} dut to: {}", product, throwable.getMessage());
+                log.error("Unable to send message = {} dut to: {}", fileName, throwable.getMessage());
             }
 
             @Override
-            public void onSuccess(SendResult<String, String> stringDataSendResult) {
-                log.info("Sent Message = {} with offset = {}", product, stringDataSendResult.getRecordMetadata().offset());
+            public void onSuccess(SendResult<String, File> stringDataSendResult) {
+                log.info("Sent Message = {} with offset = {}", fileName, stringDataSendResult.getRecordMetadata().offset());
             }
         });
     }
