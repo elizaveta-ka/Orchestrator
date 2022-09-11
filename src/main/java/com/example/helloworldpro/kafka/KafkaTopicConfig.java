@@ -30,4 +30,12 @@ public class KafkaTopicConfig {
     public NewTopic topic() {
         return new NewTopic(topicName, 1, (short) 1);
     }
+
+    //topicName для создания новых топико
+
+//    @Bean
+//    public NewTopic topic() {
+//        return new NewTopic(topicName, 1, (short) 1);
+//    }
+
 }

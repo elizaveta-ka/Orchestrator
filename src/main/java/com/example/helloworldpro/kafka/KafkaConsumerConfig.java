@@ -23,7 +23,7 @@ public class KafkaConsumerConfig {
     @Value(value = "${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
-    public ConsumerFactory<String, Product> consumerFactory() {
+    public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ConsumerConfig.GROUP_ID_CONFIG, "consuming");
@@ -34,7 +34,7 @@ public class KafkaConsumerConfig {
         typeMapper.setIdClassMapping(classMap);
         typeMapper.addTrustedPackages("*");
 
-        JsonDeserializer<Product> jsonDeserializer = new JsonDeserializer<>(Product.class);
+        JsonDeserializer<String> jsonDeserializer = new JsonDeserializer<>(String.class);
         jsonDeserializer.setTypeMapper(typeMapper);
         jsonDeserializer.setUseTypeMapperForKey(true);
 
@@ -42,8 +42,8 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Product> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Product> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
