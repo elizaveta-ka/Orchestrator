@@ -1,18 +1,39 @@
 package com.example.helloworldpro.kafka;
 
-import com.example.helloworldpro.model.Product;
-import com.example.helloworldpro.repository.IProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 
 public class MessageListener {
+    MessageProducer messageProducer;
 
-//    @Autowired
-//    private IProductRepository productRepository;
+    @KafkaListener(topics = "save", containerFactory = "kafkaListenerContainerFactory")
+    public void listenerSave(String product) {
+        System.out.println("Received message for save from front: " + product);
+        messageProducer.sendMessage(product, "save");//отправляем на сохранение в базу
+    }
 
-//    @KafkaListener(topics = "${kafka.topic.name}", containerFactory = "kafkaListenerContainerFactory")
-//    public void listener(Product product) {
-//        System.out.println("Recieved message: " + product);
-////        productRepository.save(product);
-//    }
+    @KafkaListener(topics = "update", containerFactory = "kafkaListenerContainerFactory")
+    public void listenerUpdate(String product) {
+        System.out.println("Received message for update: " + product);
+        messageProducer.sendMessage(product, "update");//отправляем в базу
+    }
+
+    @KafkaListener(topics = "delete", containerFactory = "kafkaListenerContainerFactory")
+    public void listenerDelete(String product) {
+        System.out.println("Received message for delete: " + product);
+        messageProducer.sendMessage(product, "delete");
+    }
+
+    //getByID
+    @KafkaListener(topics = "getOne", containerFactory = "kafkaListenerContainerFactory")
+    public void listenerGetById(String product) {
+        System.out.println("Received message for getById : " + product);
+        messageProducer.sendMessage(product, "getOne");
+    }
+
+    @KafkaListener(topics = "getAll", containerFactory = "kafkaListenerContainerFactory")
+    public void listenerGetAll(String product) {
+        System.out.println("Received message for getAll: " + product);
+        messageProducer.sendMessage(product, "getAll");
+    }
+
 }
