@@ -23,12 +23,15 @@ public class MessageProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @Value(value = "${kafka.topic.name}")
-    private String topicName;
 
 
-    public void sendMessage(String product) {
-        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, product);
+
+//    @Value(value = "${kafka.topic.name}")
+//    private String topicName;
+
+
+    public void sendMessage(String product, String topicName) {
+        ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName,product);
 
         future.addCallback(new ListenableFutureCallback<>() {
             @Override

@@ -26,6 +26,7 @@ public class ConsumerFileConfig {
     public ConsumerFactory<String, File> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, "consuming");
 
         DefaultJackson2JavaTypeMapper typeMapper = new DefaultJackson2JavaTypeMapper();
         Map<String, Class<?>> classMap = new HashMap<>();
@@ -40,7 +41,7 @@ public class ConsumerFileConfig {
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, File> kafkaListenerContainerFactory() {
+    public ConcurrentKafkaListenerContainerFactory<String, File> kafkaListenerFileContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, File> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
