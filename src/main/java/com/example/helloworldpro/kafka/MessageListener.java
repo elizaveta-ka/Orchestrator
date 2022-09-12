@@ -6,6 +6,10 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 @Slf4j
 public class MessageListener {
+
+    public MessageListener() {
+    }
+
     MessageProducer messageProducer;
 
     @KafkaListener(topics = "save", containerFactory = "kafkaListenerContainerFactory")
