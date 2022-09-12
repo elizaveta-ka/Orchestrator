@@ -1,5 +1,6 @@
 package com.example.helloworldpro.kafka;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +17,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+
+@Slf4j
 @EnableKafka
 @Configuration//принимаем файл с фронта для парсера
 public class ConsumerFileConfig {
@@ -44,6 +47,7 @@ public class ConsumerFileConfig {
     public ConcurrentKafkaListenerContainerFactory<String, File> kafkaListenerFileContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, File> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
+        log.info("Configure consumerOrchestrator File");
         return factory;
     }
 }

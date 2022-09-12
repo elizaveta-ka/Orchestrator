@@ -1,6 +1,7 @@
 package com.example.helloworldpro.kafka;
 
 import com.example.helloworldpro.model.Product;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.kafka.core.ConsumerFactory;
@@ -15,7 +16,7 @@ import org.springframework.kafka.support.mapping.DefaultJackson2JavaTypeMapper;
 
 import java.util.HashMap;
 import java.util.Map;
-
+@Slf4j
 @EnableKafka
 @Configuration
 public class KafkaConsumerConfig {
@@ -45,6 +46,7 @@ public class KafkaConsumerConfig {
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
+        log.info("Configure consumerOrchestrator Kafka");
         return factory;
     }
 }

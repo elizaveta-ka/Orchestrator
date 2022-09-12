@@ -37,7 +37,7 @@ public class MessageProducerFile {
 
             @Override
             public void onSuccess(SendResult<String, File> stringDataSendResult) {
-                log.info("Sent Message = {} with offset = {}", fileName, stringDataSendResult.getRecordMetadata().offset());
+                log.info("Message sent successfully with offset = {}", stringDataSendResult.getRecordMetadata().offset());
             }
         });
     }

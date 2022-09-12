@@ -1,11 +1,8 @@
 package com.example.helloworldpro.kafka;
 
-import com.example.helloworldpro.model.Product;
-
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
@@ -23,9 +20,6 @@ public class MessageProducer {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-
-
-
 //    @Value(value = "${kafka.topic.name}")
 //    private String topicName;
 
@@ -41,7 +35,7 @@ public class MessageProducer {
 
             @Override
             public void onSuccess(SendResult<String, String> stringDataSendResult) {
-                log.info("Sent Message = {} with offset = {}", product, stringDataSendResult.getRecordMetadata().offset());
+                log.info("Message sent successfully with offset = {}", stringDataSendResult.getRecordMetadata().offset());
             }
         });
     }
