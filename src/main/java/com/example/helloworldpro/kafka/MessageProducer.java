@@ -1,6 +1,5 @@
 package com.example.helloworldpro.kafka;
 
-import com.example.helloworldpro.model.Product;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

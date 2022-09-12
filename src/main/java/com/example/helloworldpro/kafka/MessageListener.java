@@ -3,6 +3,10 @@ package com.example.helloworldpro.kafka;
 import org.springframework.kafka.annotation.KafkaListener;
 
 public class MessageListener {
+
+    public MessageListener() {
+    }
+
     MessageProducer messageProducer;
 
     @KafkaListener(topics = "save", containerFactory = "kafkaListenerContainerFactory")
