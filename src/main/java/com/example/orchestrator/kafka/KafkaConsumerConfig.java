@@ -1,6 +1,5 @@
-package com.example.helloworldpro.kafka;
+package com.example.orchestrator.kafka;
 
-import com.example.helloworldpro.model.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

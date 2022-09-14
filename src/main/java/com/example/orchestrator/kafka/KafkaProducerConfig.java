@@ -1,4 +1,5 @@
-package com.example.helloworldpro.kafka;
+package com.example.orchestrator.kafka;
+
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -11,18 +12,18 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-@Slf4j
 
+@Slf4j
 @Configuration
-public class ProducerFileConfig {
+public class KafkaProducerConfig {
+
     @Value("${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, File> producerFileFactory() {
+    public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -32,9 +33,8 @@ public class ProducerFileConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, File> kafkaFileTemplate() {
-        log.info("Configure producerOrchestrator File");
-        return new KafkaTemplate<>(producerFileFactory());
+    public KafkaTemplate<String, String> kafkaTemplate() {
+        log.info("Configure producerOrchestrator Kafka");
+        return new KafkaTemplate<>(producerFactory());
     }
-
 }

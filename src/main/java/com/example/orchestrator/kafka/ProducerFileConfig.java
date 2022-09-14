@@ -1,7 +1,5 @@
-package com.example.helloworldpro.kafka;
+package com.example.orchestrator.kafka;
 
-
-import com.example.helloworldpro.model.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -13,18 +11,18 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-
 @Slf4j
-@Configuration
-public class KafkaProducerConfig {
 
+@Configuration
+public class ProducerFileConfig {
     @Value("${kafka.bootstrapAddress}")
     private String bootstrapAddress;
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<String, File> producerFileFactory() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -34,8 +32,9 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
-        log.info("Configure producerOrchestrator Kafka");
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, File> kafkaFileTemplate() {
+        log.info("Configure producerOrchestrator File");
+        return new KafkaTemplate<>(producerFileFactory());
     }
+
 }

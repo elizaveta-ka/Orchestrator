@@ -1,6 +1,6 @@
-package com.example.helloworldpro.repository;
+package com.example.orchestrator.repository;
 
-import com.example.helloworldpro.model.Product;
+import com.example.orchestrator.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

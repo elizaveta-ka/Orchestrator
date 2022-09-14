@@ -1,4 +1,4 @@
-package com.example.helloworldpro.model;
+package com.example.orchestrator.model;
 
 public class Product {
 

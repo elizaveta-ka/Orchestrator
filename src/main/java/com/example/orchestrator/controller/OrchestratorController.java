@@ -1,7 +1,7 @@
-package com.example.helloworldpro.controller;
+package com.example.orchestrator.controller;
 
-import com.example.helloworldpro.kafka.MessageProducer;
-import com.example.helloworldpro.kafka.MessageProducerFile;
+import com.example.orchestrator.kafka.MessageProducer;
+import com.example.orchestrator.kafka.MessageProducerFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;

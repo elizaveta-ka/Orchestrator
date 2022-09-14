@@ -1,4 +1,4 @@
-package com.example.helloworldpro.security;
+package com.example.orchestrator.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.example.helloworldpro.kafka;
+package com.example.orchestrator.kafka;
 
 
 import lombok.NoArgsConstructor;
