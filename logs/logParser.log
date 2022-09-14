@@ -1,0 +1,66 @@
+2022-09-14 13:40:01.084  INFO 8332 --- [restartedMain] c.e.h.kafka.KafkaProducerConfig          : Configure producerOrchestrator Kafka
+2022-09-14 13:40:01.097  INFO 8332 --- [restartedMain] c.e.h.kafka.ProducerFileConfig           : Configure producerOrchestrator File
+2022-09-14 13:40:01.108  INFO 8332 --- [restartedMain] c.e.h.kafka.KafkaConsumerConfig          : Configure consumerOrchestrator Kafka
+2022-09-14 13:40:01.149  INFO 8332 --- [restartedMain] c.e.h.kafka.ConsumerFileConfig           : Configure consumerOrchestrator File
+2022-09-14 13:40:01.152  INFO 8332 --- [restartedMain] c.e.h.kafka.KafkaTopicConfig             : Create orchestrator topic parser
+2022-09-14 13:40:01.153  INFO 8332 --- [restartedMain] c.e.h.kafka.KafkaTopicConfig             : Create orchestrator topic topicFrontToParser
+2022-09-14 13:40:01.153  INFO 8332 --- [restartedMain] c.e.h.kafka.KafkaTopicConfig             : Create orchestrator topic save
+2022-09-14 13:40:01.329  WARN 8332 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2022-09-14 13:40:01.492  WARN 8332 --- [restartedMain] c.e.h.HelloWorldProApplication           : Orchestrator run! 14.09.2022, 13:40:01
+2022-09-14 13:40:11.975  INFO 8332 --- [http-nio-8083-exec-1] c.e.h.controller.OrchestratorController  : Listener orchestrator: file from Front file3.csv
+2022-09-14 13:40:12.017  INFO 8332 --- [http-nio-8083-exec-1] c.e.h.controller.OrchestratorController  : Producer orchestrator: file file3.csv to Parser, topicFrontToParser
+2022-09-14 13:40:12.027  INFO 8332 --- [kafka-producer-network-thread | producer-1] c.e.h.kafka.MessageProducerFile          : Message sent successfully with offset = 661017
+2022-09-14 13:40:12.087  INFO 8332 --- [org.springframework.kafka.KafkaListenerEndpointContainer#0-0-C-1] c.e.h.controller.OrchestratorController  : Listener orchestrator: from parser String, parser [{
+"name" : "OU001",
+"price" : "10000",
+"properties" : [
+{
+"Какой-то набор букв" : "Бла-бла",
+"Артикул" : "454"
+}]
+},
+{
+"name" : "OU002",
+"price" : "",
+"properties" : [
+{
+"Какой-то набор букв" : "Маректинг и реклама",
+"Артикул" : "233"
+}]
+},
+{
+"name" : "OU003",
+"price" : "11000",
+"properties" : [
+{
+"Какой-то набор букв" : "Департамент по работе с персоналом",
+"Артикул" : "564"
+}]
+},
+{
+"name" : "OU004",
+"price" : "7000",
+"properties" : [
+{
+"Какой-то набор букв" : "Сервисный департамент",
+"Артикул" : "898"
+}]
+},
+{
+"name" : "OU005",
+"price" : "6000",
+"properties" : [
+{
+"Какой-то набор букв" : "Техническая поддержка",
+"Артикул" : "546"
+}]
+},
+{
+"name" : "OU006",
+"price" : "16000",
+"properties" : [
+{
+"Какой-то набор букв" : "Закупки",
+"Артикул" : "882"
+}]
+}]

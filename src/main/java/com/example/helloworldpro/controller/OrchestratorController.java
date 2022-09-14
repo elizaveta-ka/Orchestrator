@@ -48,7 +48,7 @@ public class OrchestratorController {
     @GetMapping()
     @KafkaListener(topics = "topicFrontToParser", containerFactory = "kafkaListenerContainerFactory")
     public void listener() {
-        File file = new File("/Users/ob_so/IdeaProjects/ServiceDemoProject/file3.csv");
+        File file = new File("/Users/elizavetakabak/repos/ServiceDemoProject/src/main/resources/file3.csv");
         log.info("Listener orchestrator: file from Front {}", file.getName());
         messageProducerFile.sendMessage(file, "topicFrontToParser");
         log.info("Producer orchestrator: file {} to Parser, topicFrontToParser", file.getName());
