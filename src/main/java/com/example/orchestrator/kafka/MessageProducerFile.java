@@ -21,10 +21,6 @@ public class MessageProducerFile {
     public MessageProducerFile(KafkaTemplate<String, File> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
-
-//    @Value(value = "${kafka.topic.name}")
-//    private String topicName;
-
     public void sendMessage(File fileName, String topicName) {
         ListenableFuture<SendResult<String, File>> future = kafkaTemplate.send(topicName, fileName);
 

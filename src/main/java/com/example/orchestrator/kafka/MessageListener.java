@@ -9,7 +9,6 @@ public class MessageListener {
 
     public MessageListener() {
     }
-
     MessageProducer messageProducer;
 
     @KafkaListener(topics = "save", containerFactory = "kafkaListenerContainerFactory")
