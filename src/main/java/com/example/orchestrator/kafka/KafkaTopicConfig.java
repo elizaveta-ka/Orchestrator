@@ -48,6 +48,11 @@ public class KafkaTopicConfig {
 //    public NewTopic topicSaveOne() {
 //        return new NewTopic("saveOne", 2, (short) 1);
 //    }
+
+    @Bean
+    public NewTopic topicReact() {
+        return new NewTopic("test-topic", 2, (short) 1);
+    }
     @Bean
     public NewTopic topicUpdate() {
         return new NewTopic("update", 2, (short) 1);
