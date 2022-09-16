@@ -5,12 +5,9 @@ import com.example.orchestrator.kafka.MessageProducerFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.io.File;
+import java.io.IOException;
 
 @Slf4j
 @RestController
@@ -27,28 +24,32 @@ public class OrchestratorController {
         this.messageProducerFile = messageProducerFile;
     }
 
-    @GetMapping("/orchestra")
-    @KafkaListener(topics = "parser", containerFactory = "kafkaListenerContainerFactory")
-    public void listener(String product) {
-        log.info("Listener orchestrator: from parser String, parser " + product);
-        //  messageProducer.sendMessage(product);
-
+    @KafkaListener(topics = "test-topic", containerFactory = "kafkaListenerContainerFactory")
+    public void listenerReact(String str) throws IOException, InterruptedException {
+        log.info("Listener orchestrator: from React,  str " + str);
+//          messageProducer.sendMessage(product, "parser");
     }
+
+    @KafkaListener(topics = "parser", containerFactory = "kafkaListenerContainerFactory")
+    public void listener(String product) throws IOException, InterruptedException {
+        log.info("Listener orchestrator: from parser String, parser " + product);
+          messageProducer.sendMessage(product, "save");
+    }
+
 //пробовали отправить на фронт
 //    @GetMapping("/orchestra")
-//    @KafkaListener(topics = "parser", containerFactory = "kafkaListenerContainerFactory")
-//    public String listener(String product) {
+//    public String show(String product) {
 //        //System.out.println("Recieved message: from parser String " + product);
 //        String string=product;
 //        //  messageProducer.sendMessage(product);
-//        return string;
+//        return "";
 //    }
 
     //принимаем файл с фронта и передаем в парсер
     @GetMapping()
     @KafkaListener(topics = "topicFrontToParser", containerFactory = "kafkaListenerContainerFactory")
     public void listener() {
-        File file = new File("/Users/elizavetakabak/repos/Parser/src/main/resources/file3.csv");
+        File file = new File("/Users/elizavetakabak/repos/Parser/src/main/resources/file.csv");
         log.info("Listener orchestrator: file from Front {}", file.getName());
         messageProducerFile.sendMessage(file, "topicFrontToParser");
         log.info("Producer orchestrator: file {} to Parser, topicFrontToParser", file.getName());
